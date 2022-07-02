@@ -44,17 +44,27 @@ def index():
 
 @bp.route('/<int:id>')
 def show(id): 
+    user = models.User.query.filter_by(id=id).first()
+    user_dict = {
+        'username':user.username
+    }
+
+    return user_dict
+    
     # find the reptile by id
     reptile = models.Reptile.query.filter_by(id=id).first()
 
     # create a dictionary of the reptile's information
     reptile_dict = {
-        'common_name': reptile.common_name,
-        'scientific_name': reptile.scientific_name,
-        'conservation_status': reptile.conservation_status,
-        'native_habitat': reptile.native_habitat,
-        'fun_fact': reptile.fun_fact
+    
+    'common_name': 'Ball python',
+    'scientific_name': 'Python regius',
+    'conservative_status': 'Near threatened',
+    'native_habitat': 'Forest, savanna, shrubland, grassland',
+    'fun_fact': 'Ball pythons recieved their common name from their behavior of curling up into a ball when threatened.'
+
     }
+    
     
     # return the dictionary, which will get returned as JSON by default
     return reptile_dict
